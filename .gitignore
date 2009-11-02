@@ -1,0 +1,4 @@
+*~
+*.abcl
+war/WEB-INF/classes/
+war/WEB-INF/lisp-lib/

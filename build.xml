@@ -1,0 +1,86 @@
+<project basedir="." default="all">
+
+  <property name="sdk.dir" location="/home/ancient/local/opt/appengine-java-sdk" />
+  <property name="clbuild.dir" location="/home/ancient/letter/lisp/clbuild/source" />
+  <property name="mylib.dir" location="/home/ancient/letter/lisp/lib" />
+
+  <property name="lisp-lib.dir" location="war/WEB-INF/lisp-lib" />
+
+
+  <import file="${sdk.dir}/config/user/ant-macros.xml" />
+
+  <path id="project.classpath">
+    <pathelement path="war/WEB-INF/classes" />
+    <fileset dir="war/WEB-INF/lib">
+      <include name="**/*.jar" />
+    </fileset>
+    <fileset dir="${sdk.dir}/lib">
+      <include name="shared/**/*.jar" />
+    </fileset>
+  </path>
+
+  <target name="all" depends="clean,copy-files" />
+
+  <target name="clean">
+    <delete dir="${lisp-lib.dir}" />
+  </target>
+
+  <target name="copy-files">
+    <!--
+    <copy todir="${lisp-lib.dir}">
+      <fileset dir="src/lisp">
+	<include name="**/*.abcl"/>
+      </fileset>
+    </copy>
+    -->
+    <antcall target="copy-from-mylib">
+      <param name="copy-from-mylib.system" value="abcl-helper"/>
+    </antcall>
+    <antcall target="copy-from-clbuild">
+      <param name="copy-from-clbuild.system" value="cl-who"/>
+    </antcall>
+    <antcall target="copy-from-clbuild">
+      <param name="copy-from-clbuild.system" value="cl-ppcre"/>
+    </antcall>
+  </target>
+
+  <target name="copy-from-clbuild">
+    <copy todir="${lisp-lib.dir}/${copy-from-clbuild.system}">
+      <fileset dir="${clbuild.dir}/${copy-from-clbuild.system}">
+        <exclude name="**/_darcs/**"/>
+        <include name="**/*.abcl"/>
+        <include name="**/*.asd"/>
+      </fileset>
+    </copy>
+  </target>
+
+  <target name="copy-from-mylib">
+    <copy todir="${lisp-lib.dir}/${copy-from-mylib.system}">
+      <fileset dir="${mylib.dir}/${copy-from-mylib.system}">
+        <exclude name="**/_darcs/**"/>
+        <include name="**/*.abcl"/>
+        <include name="**/*.asd"/>
+      </fileset>
+    </copy>
+  </target>
+
+  <target name="copy.war">
+    <delete dir="/tmp/gae-war" />
+    <copy todir="/tmp/gae-war">
+      <fileset dir="war">
+        <exclude name="**/*.lisp"/>
+        <exclude name="**/*~"/>
+      </fileset>
+    </copy>
+  </target>
+
+  <target name="debug" description="run local dev appserver" depends="all, copy.war">
+    <dev_appserver war="/tmp/gae-war" />
+    <!-- dev_appserver war="war" / -->
+  </target>
+
+  <target name="deploy" description="deploy to appspot" depends="all, copy.war">
+    <appcfg action="update" war="/tmp/gae-war" />
+    <!-- appcfg action="update" war="war" /-->
+  </target>
+</project>
