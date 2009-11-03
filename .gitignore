@@ -2,3 +2,4 @@
 *.abcl
 war/WEB-INF/classes/
 war/WEB-INF/lisp-lib/
+war/WEB-INF/appengine-generated/

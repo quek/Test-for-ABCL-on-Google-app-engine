@@ -7,7 +7,16 @@ http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
 	<servlet>
 		<servlet-name>abcl</servlet-name>
 		<servlet-class>j.AbclServlet</servlet-class>
+		<load-on-startup>10</load-on-startup>
 	</servlet>
+	<servlet>
+		<servlet-name>test</servlet-name>
+		<servlet-class>j.TestServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>test</servlet-name>
+		<url-pattern>/test</url-pattern>
+	</servlet-mapping>
 	<servlet-mapping>
 		<servlet-name>abcl</servlet-name>
 		<url-pattern>/*</url-pattern>

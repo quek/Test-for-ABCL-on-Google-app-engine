@@ -75,8 +75,7 @@
   </target>
 
   <target name="debug" description="run local dev appserver" depends="all, copy.war">
-    <dev_appserver war="/tmp/gae-war" />
-    <!-- dev_appserver war="war" / -->
+    <dev_appserver war="war" />
   </target>
 
   <target name="deploy" description="deploy to appspot" depends="all, copy.war">
