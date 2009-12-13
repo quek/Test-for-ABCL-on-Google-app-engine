@@ -1,16 +1,10 @@
-(in-package :app)
-
-(eval-when (:compile-toplevel :load-toplevel :execute)
-  (j:jimport |com.google.appengine.api.datastore.Entity|)
-  (j:jimport |com.google.appengine.api.datastore.Key|)
-  (j:jimport |com.google.appengine.api.datastore.KeyFactory|)
-  (j:jimport |com.google.appengine.api.datastore.DatastoreService|)
-  (j:jimport |com.google.appengine.api.datastore.DatastoreServiceFactory|))
+(in-package :gae-user)
 
 (defun ds ()
   (let* ((service (|getDatastoreService| |DatastoreServiceFactory|))
          (entity (j:new |Entity| "Bano")))
     (|setProperty| entity "name" "kocho")
+    (|setProperty| entity "weight" 72)
     (let ((key (|put| service entity)))
       (let ((found-entity (|get| service key)))
         (cl-who:with-html-output (*standard-output*)

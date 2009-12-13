@@ -2,17 +2,9 @@ package j;
 
 import java.io.IOException;
 
-import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
-import org.armedbear.lisp.ConditionThrowable;
-import org.armedbear.lisp.JavaObject;
-import org.armedbear.lisp.Lisp;
-import org.armedbear.lisp.LispThread;
-import org.armedbear.lisp.SpecialBinding;
-import org.armedbear.lisp.Symbol;
 
 import com.google.appengine.api.datastore.DatastoreService;
 import com.google.appengine.api.datastore.DatastoreServiceFactory;

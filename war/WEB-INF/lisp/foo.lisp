@@ -1,8 +1,8 @@
-(in-package :app)
+(in-package :gae-user)
 
 (defun foo ()
-  (let ((foo (servlet::|getParameter| servlet::*request* "foo"))
-        (bar (servlet::|getParameter| servlet::*request* "bar")))
+  (let ((foo (|getParameter| *request* "foo"))
+        (bar (|getParameter| *request* "bar")))
     (cl-who:with-html-output (*standard-output*)
       (:html
        (:head (:title "foo"))
