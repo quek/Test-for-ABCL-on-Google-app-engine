@@ -8,4 +8,4 @@
                (:file "foo")
                (:file "bar")
                )
-  :depends-on (abcl-helper cl-who cl-ppcre))
+  :depends-on (abcl-helper cl-who))
