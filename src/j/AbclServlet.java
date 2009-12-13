@@ -39,7 +39,7 @@ public class AbclServlet extends HttpServlet {
 			currentThread.bindSpecial(Symbol.STANDARD_OUTPUT,
 					new org.armedbear.lisp.Stream(resp.getOutputStream(),
 							Symbol.CHARACTER, Lisp.PACKAGE_KEYWORD
-									.addInternalSymbol("UTF-8")));
+									.intern("UTF-8")));
 
 			resp.setContentType("text/html; charset=utf-8");
 

@@ -14,7 +14,6 @@
                   (:pre (cl-who:esc (prin1-to-string  entity)))
                   (:pre (cl-who:esc (prin1-to-string  found-entity))))))))))
 
-
 (defun bar ()
   (cl-who:with-html-output (*standard-output*)
     (:html
